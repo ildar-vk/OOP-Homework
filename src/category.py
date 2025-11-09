@@ -7,11 +7,13 @@ class Category:
         self.description = description
         self.__products = products
         Category.category_count += 1
+        # Увеличиваем общий счетчик товаров на количество товаров в этой категории
         Category.product_count += len(products)
 
     def add_product(self, product):
         """Добавляет товар в категорию"""
         self.__products.append(product)
+        # Увеличиваем общий счетчик товаров при добавлении
         Category.product_count += 1
 
     @property
@@ -26,3 +28,8 @@ class Category:
     def __len__(self):
         """Возвращает количество товаров в категории"""
         return len(self.__products)
+
+    @property
+    def products_list(self):
+        """Возвращает список объектов товаров (для внутреннего использования)"""
+        return self.__products
