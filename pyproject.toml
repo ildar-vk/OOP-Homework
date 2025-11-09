@@ -20,9 +20,9 @@ flake8-black = "^0.4.0"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-tool.black]
+[tool.black]
 # Указываем, что line-length = 88 (стандарт для black) и нужно игнорировать папку venv
-line-length = 88
+line-length = 119
 target-version = ['py311'] # Укажи свою версию Python, например, py310, py39
 include = '\.pyi?$'
 exclude = '''
@@ -38,11 +38,11 @@ exclude = '''
 # Говорим isort использовать настройки, совместимые с black
 profile = "black"
 multi_line_output = 3
-line_length = 88
+line_length = 119
 
 [tool.flake8]
 # Настраиваем flake8, чтобы он не конфликтовал с black
-max-line-length = 88
+max-line-length = 119
 extend-ignore = "E203, W503, E501"
 # E203, W503 - конфликтуют с black. E501 (line too long) - за этим следит black.
 exclude = [".venv", "venv", "migrations"]
