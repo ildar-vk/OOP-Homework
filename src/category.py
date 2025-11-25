@@ -7,29 +7,26 @@ class Category:
         self.description = description
         self.__products = products
         Category.category_count += 1
-        # Увеличиваем общий счетчик товаров на количество товаров в этой категории
         Category.product_count += len(products)
 
+    def __str__(self) -> str:
+        total_quantity = sum(product.quantity for product in self.__products)
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
+
+    def __len__(self):
+        return len(self.__products)
+
     def add_product(self, product):
-        """Добавляет товар в категорию"""
         self.__products.append(product)
-        # Увеличиваем общий счетчик товаров при добавлении
         Category.product_count += 1
 
     @property
     def products(self) -> str:
-        """Возвращает строку с информацией о всех товарах категории"""
         products_str = []
         for product in self.__products:
-            product_info = f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт."
-            products_str.append(product_info)
+            products_str.append(str(product))  # Используем __str__ продукта
         return "\n".join(products_str)
-
-    def __len__(self):
-        """Возвращает количество товаров в категории"""
-        return len(self.__products)
 
     @property
     def products_list(self):
-        """Возвращает список объектов товаров (для внутреннего использования)"""
         return self.__products

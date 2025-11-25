@@ -201,10 +201,9 @@ class TestCategory:
         products_list = category.products_list
 
         # Пытаемся изменить его - в Python списки mutable, так что это может повлиять
-        # на внутренний список. Это нормальное поведение.
+        # на внутренний список.
         products_list.append(Product("New", "New", 300.0, 3))
 
-        # В Python это поведение нормально - список mutable
         # Проверяем что оба списка ссылаются на один и тот же объект
         assert len(category.products_list) == 2  # Теперь должно быть 2
         assert len(category) == 2  # Должно быть 2
@@ -225,3 +224,21 @@ class TestCategory:
         # Проверяем products property
         products_str = category.products
         assert "Продукт с русскими, 123.45 руб. Остаток: 7 шт." in products_str
+
+    def test_category_str_method(self) -> None:
+        """Тест строкового представления категории"""
+        category = Category("Test Category", "Test Description", self.products_list)
+        expected = "Test Category, количество продуктов: 15 шт."  # 5 + 10 = 15
+        assert str(category) == expected
+
+    def test_category_str_empty(self) -> None:
+        """Тест строкового представления пустой категории"""
+        category = Category("Empty Category", "Empty Description", [])
+        expected = "Empty Category, количество продуктов: 0 шт."
+        assert str(category) == expected
+
+    def test_category_str_single_product(self) -> None:
+        """Тест строкового представления категории с одним товаром"""
+        category = Category("Single", "Desc", [self.product1])
+        expected = "Single, количество продуктов: 5 шт."
+        assert str(category) == expected
