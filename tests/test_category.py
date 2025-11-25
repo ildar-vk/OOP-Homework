@@ -201,10 +201,9 @@ class TestCategory:
         products_list = category.products_list
 
         # Пытаемся изменить его - в Python списки mutable, так что это может повлиять
-        # на внутренний список. Это нормальное поведение.
+        # на внутренний список.
         products_list.append(Product("New", "New", 300.0, 3))
 
-        # В Python это поведение нормально - список mutable
         # Проверяем что оба списка ссылаются на один и тот же объект
         assert len(category.products_list) == 2  # Теперь должно быть 2
         assert len(category) == 2  # Должно быть 2
@@ -226,7 +225,6 @@ class TestCategory:
         products_str = category.products
         assert "Продукт с русскими, 123.45 руб. Остаток: 7 шт." in products_str
 
-    # НОВЫЕ ТЕСТЫ ДЛЯ МАГИЧЕСКИХ МЕТОДОВ
     def test_category_str_method(self) -> None:
         """Тест строкового представления категории"""
         category = Category("Test Category", "Test Description", self.products_list)

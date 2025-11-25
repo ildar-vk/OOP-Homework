@@ -72,7 +72,6 @@ class TestProduct:
         assert hasattr(product, "price")
         assert hasattr(product, "quantity")
 
-    # ДОБАВЛЕННЫЕ ТЕСТЫ ДЛЯ ПОЛНОГО ПОКРЫТИЯ
     def test_product_with_special_characters(self) -> None:
         """Тест товара со специальными символами"""
         product = Product("Продукт с русскими", "Описание с 'кавычками'", 123.45, 7)
@@ -132,7 +131,6 @@ class TestProduct:
         assert product.price == 999.99
         assert product.quantity == 25
 
-    # НОВЫЕ ТЕСТЫ ДЛЯ МАГИЧЕСКИХ МЕТОДОВ
     def test_product_str_method(self) -> None:
         """Тест строкового представления продукта"""
         product = Product("Test Product", "Test Description", 1234.56, 7)
