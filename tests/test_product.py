@@ -1,6 +1,8 @@
 import os
 import sys
 
+import pytest
+
 from src.product import Product
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
@@ -129,3 +131,52 @@ class TestProduct:
         assert product.description == "Complete Description"
         assert product.price == 999.99
         assert product.quantity == 25
+
+    # НОВЫЕ ТЕСТЫ ДЛЯ МАГИЧЕСКИХ МЕТОДОВ
+    def test_product_str_method(self) -> None:
+        """Тест строкового представления продукта"""
+        product = Product("Test Product", "Test Description", 1234.56, 7)
+        expected = "Test Product, 1234.56 руб. Остаток: 7 шт."
+        assert str(product) == expected
+
+    def test_product_addition(self) -> None:
+        """Тест сложения двух продуктов"""
+        product1 = Product("Product 1", "Desc 1", 100.0, 5)
+        product2 = Product("Product 2", "Desc 2", 200.0, 3)
+
+        result = product1 + product2
+        expected = (100.0 * 5) + (200.0 * 3)  # 500 + 600 = 1100
+        assert result == expected
+
+    def test_product_addition_with_zero_quantity(self) -> None:
+        """Тест сложения продуктов с нулевым количеством"""
+        product1 = Product("Product 1", "Desc 1", 100.0, 0)
+        product2 = Product("Product 2", "Desc 2", 200.0, 5)
+
+        result = product1 + product2
+        expected = (100.0 * 0) + (200.0 * 5)  # 0 + 1000 = 1000
+        assert result == 1000.0
+
+    def test_product_addition_same_product(self) -> None:
+        """Тест сложения продукта с самим собой"""
+        product = Product("Test", "Desc", 50.0, 4)
+        result = product + product
+        expected = (50.0 * 4) + (50.0 * 4)  # 200 + 200 = 400
+        assert result == 400.0
+
+    def test_product_addition_different_types(self) -> None:
+        """Тест сложения продукта с неподдерживаемым типом"""
+        product = Product("Test", "Desc", 100.0, 5)
+
+        with pytest.raises(TypeError):
+            product + "not_a_product"
+
+    def test_product_addition_with_negative_price(self) -> None:
+        """Тест сложения продуктов с отрицательной ценой (через сеттер)"""
+        product1 = Product("Product 1", "Desc 1", 100.0, 5)
+        product2 = Product("Product 2", "Desc 2", -200.0, 3)  # Отрицательная цена через конструктор
+
+        # В конструкторе цена не проверяется, только через сеттер
+        result = product1 + product2
+        expected = (100.0 * 5) + (-200.0 * 3)  # 500 + (-600) = -100
+        assert result == -100.0

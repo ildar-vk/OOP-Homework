@@ -225,3 +225,22 @@ class TestCategory:
         # Проверяем products property
         products_str = category.products
         assert "Продукт с русскими, 123.45 руб. Остаток: 7 шт." in products_str
+
+    # НОВЫЕ ТЕСТЫ ДЛЯ МАГИЧЕСКИХ МЕТОДОВ
+    def test_category_str_method(self) -> None:
+        """Тест строкового представления категории"""
+        category = Category("Test Category", "Test Description", self.products_list)
+        expected = "Test Category, количество продуктов: 15 шт."  # 5 + 10 = 15
+        assert str(category) == expected
+
+    def test_category_str_empty(self) -> None:
+        """Тест строкового представления пустой категории"""
+        category = Category("Empty Category", "Empty Description", [])
+        expected = "Empty Category, количество продуктов: 0 шт."
+        assert str(category) == expected
+
+    def test_category_str_single_product(self) -> None:
+        """Тест строкового представления категории с одним товаром"""
+        category = Category("Single", "Desc", [self.product1])
+        expected = "Single, количество продуктов: 5 шт."
+        assert str(category) == expected

@@ -6,7 +6,7 @@ import pytest
 
 
 def test_main_execution() -> None:
-    """Тест что main.py"""
+    """Тест что main.py выполняется без ошибок"""
 
     possible_paths = [
         os.path.join(os.path.dirname(__file__), "..", "main.py"),
@@ -40,6 +40,12 @@ def test_main_execution() -> None:
     # Проверяем что есть какой-то вывод
     assert len(result.stdout) > 0, "main.py produced no output"
 
+    # Проверяем наличие ожидаемого вывода новых магических методов
+    output = result.stdout
+    assert "Смартфоны, количество продуктов:" in output
+    assert "Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт." in output
+    assert "Iphone 15, 210000.0 руб. Остаток: 8 шт." in output
+
 
 def test_main_content() -> None:
     """Тест что main.py содержит ожидаемый код"""
@@ -68,3 +74,7 @@ def test_main_content() -> None:
     assert 'if __name__ == "__main__":' in content
     assert "Product(" in content
     assert "Category(" in content
+    # Проверяем использование новых магических методов
+    assert "str(product1)" in content or "print(str(product1))" in content or "print(product1)" in content
+    assert "str(category1)" in content or "print(str(category1))" in content or "print(category1)" in content
+    assert "product1 + product2" in content
