@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eea674f6-234d-41a1-8305-b646a7a08232" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/test_main_coverage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_main_execution.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_inheritance.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_inheritance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_main.py" afterDir="false" />
-    </list>
+    <list default="true" id="eea674f6-234d-41a1-8305-b646a7a08232" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,9 +50,12 @@
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.pytest for tests.test_integration_complete.TestIntegrationComplete.executor": "Run",
     "Python tests.pytest for tests.test_main.test_main_execution.executor": "Run",
+    "Python tests.pytest for tests.test_main_coverage.TestMainCoverage.executor": "Run",
     "Python tests.pytest for tests.test_main_execution.test_main_direct_execution.executor": "Run",
     "Python tests.pytest for tests.test_product.TestProduct.test_product_addition_same_type_only.executor": "Run",
+    "Python tests.pytest for tests.tests.tests.test_integration_complete.TestIntegrationComplete.executor": "Run",
     "Python tests.pytest in test_inheritance.py.executor": "Run",
     "Python tests.pytest in test_main_execution.py.executor": "Run",
     "Python.main.executor": "Run",
@@ -76,7 +72,7 @@
       <recent name="$PROJECT_DIR$/tests" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python tests.pytest for tests.test_main_coverage.TestMainCoverage">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OOP" />
       <option name="ENV_FILES" value="" />
@@ -97,6 +93,40 @@
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for tests.test_integration_complete.TestIntegrationComplete" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="OOP" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.test_integration_complete.TestIntegrationComplete&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for tests.test_main_coverage.TestMainCoverage" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="OOP" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.test_main_coverage.TestMainCoverage&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="pytest for tests.test_main_execution.test_main_direct_execution" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
@@ -133,47 +163,13 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for tests.tests.test_integration_complete.TestIntegrationComplete" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="OOP" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.tests.test_integration_complete.TestIntegrationComplete&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest in test_main_execution.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="OOP" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_main_execution.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.pytest for tests.tests.test_integration_complete.TestIntegrationComplete" />
+        <item itemvalue="Python tests.pytest for tests.test_main_coverage.TestMainCoverage" />
+        <item itemvalue="Python tests.pytest for tests.test_integration_complete.TestIntegrationComplete" />
         <item itemvalue="Python tests.pytest for tests.test_main_execution.test_main_direct_execution" />
         <item itemvalue="Python tests.pytest for tests.test_main.test_main_execution" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python tests.pytest in test_main_execution.py" />
       </list>
     </recent_temporary>
   </component>
