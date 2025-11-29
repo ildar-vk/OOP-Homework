@@ -4,7 +4,7 @@ import sys
 import pytest
 
 from src.category import Category
-from src.product import Product
+from src.product import Product, Smartphone
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -242,3 +242,11 @@ class TestCategory:
         category = Category("Single", "Desc", [self.product1])
         expected = "Single, количество продуктов: 5 шт."
         assert str(category) == expected
+
+    def test_category_add_product_inheritance(self) -> None:
+        """Тест что категория принимает наследников Product"""
+        smartphone = Smartphone("Phone", "Desc", 1000.0, 2, 95.5, "Model", 128, "Black")
+        category = Category("Test", "Test", [])
+
+        category.add_product(smartphone)
+        assert len(category) == 1

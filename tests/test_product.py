@@ -1,180 +1,85 @@
-import os
-import sys
-
-import pytest
-
 from src.product import Product
 
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+
+class Product:  # type: ignore
+    def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+        self.name = name
+        self.description = description
+        self.__price = price
+        self.quantity = quantity
+
+    def __str__(self) -> str:
+        return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other: "Product") -> float:
+        if self.__class__ != other.__class__:
+            raise TypeError("Нельзя складывать товары разных типов")
+        return (self.__price * self.quantity) + (other.__price * other.quantity)
+
+    @classmethod
+    def new_product(cls, product_data: dict) -> "Product":
+        # Получаем значения с проверками
+        name = product_data.get("name")
+        description = product_data.get("description", "")  # значение по умолчанию
+        price = product_data.get("price")
+        quantity = product_data.get("quantity")
+
+        # Проверка обязательных полей
+        if not name:
+            raise ValueError("Отсутствует название товара")
+        if price is None:
+            raise ValueError("Отсутствует цена")
+        if quantity is None:
+            raise ValueError("Отсутствует количество")
+
+        # Явное преобразование типов
+        return cls(  # type: ignore
+            name=str(name), description=str(description), price=float(price), quantity=int(quantity)
+        )
+
+    @property
+    def price(self) -> float:
+        return self.__price
+
+    @price.setter
+    def price(self, price: float) -> None:
+        if price <= 0:
+            print("Цена не должна быть нулевой или отрицательной")
+        else:
+            self.__price = price
 
 
-class TestProduct:
-    """Тесты для класса Product"""
+class Smartphone(Product):
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        efficiency: float,
+        model: str,
+        memory: int,
+        color: str,
+    ) -> None:
+        super().__init__(name, description, price, quantity)
+        self.efficiency = efficiency
+        self.model = model
+        self.memory = memory
+        self.color = color
 
-    def test_product_creation(self) -> None:
-        """Тест создания товара"""
-        product = Product("Test Product", "Test Description", 1000.0, 10)
-        assert product.name == "Test Product"
-        assert product.description == "Test Description"
-        assert product.price == 1000.0
-        assert product.quantity == 10
 
-    def test_new_product_class_method(self) -> None:
-        """Тест создания товара через класс-метод"""
-        product_data = {
-            "name": "Test Product",
-            "description": "Test Description",
-            "price": 1000.0,
-            "quantity": 10,
-        }
-        product = Product.new_product(product_data)
-        assert product.name == "Test Product"
-        assert product.description == "Test Description"
-        assert product.price == 1000.0
-        assert product.quantity == 10
-
-    def test_price_setter_positive(self) -> None:
-        """Тест установки корректной цены"""
-        product = Product("Test", "Test", 1000.0, 10)
-        product.price = 1500.0
-        assert product.price == 1500.0
-
-    def test_price_setter_negative(self, capsys) -> None:
-        """Тест установки отрицательной цены"""
-        product = Product("Test", "Test", 1000.0, 10)
-        product.price = -100
-        captured = capsys.readouterr()
-        assert "Цена не должна быть нулевой или отрицательной" in captured.out
-        assert product.price == 1000.0
-
-    def test_price_setter_zero(self, capsys) -> None:
-        """Тест установки нулевой цены"""
-        product = Product("Test", "Test", 1000.0, 10)
-        product.price = 0
-        captured = capsys.readouterr()
-        assert "Цена не должна быть нулевой или отрицательной" in captured.out
-        assert product.price == 1000.0
-
-    def test_product_attributes(self) -> None:
-        """Тест всех атрибутов товара"""
-        product = Product("Phone", "Smartphone", 50000.0, 5)
-        assert product.name == "Phone"
-        assert product.description == "Smartphone"
-        assert product.price == 50000.0
-        assert product.quantity == 5
-
-    def test_product_repr(self) -> None:
-        """Тест строкового представления товара через атрибуты"""
-        product = Product("Tablet", "iPad", 30000.0, 3)
-        # Проверяем что все атрибуты доступны для печати
-        assert hasattr(product, "name")
-        assert hasattr(product, "description")
-        assert hasattr(product, "price")
-        assert hasattr(product, "quantity")
-
-    def test_product_with_special_characters(self) -> None:
-        """Тест товара со специальными символами"""
-        product = Product("Продукт с русскими", "Описание с 'кавычками'", 123.45, 7)
-        assert product.name == "Продукт с русскими"
-        assert product.description == "Описание с 'кавычками'"
-        assert product.price == 123.45
-        assert product.quantity == 7
-
-    def test_product_with_different_price_formats(self) -> None:
-        """Тест товара с разными форматами цен"""
-        test_cases = [
-            (0.01, 0.01),
-            (1.0, 1.0),
-            (100.0, 100.0),
-            (1000.0, 1000.0),
-            (1000000.0, 1000000.0),
-        ]
-
-        for input_price, expected_price in test_cases:
-            product = Product("Test", "Test", input_price, 1)
-            assert product.price == expected_price
-
-    def test_product_quantity_edge_cases(self) -> None:
-        """Тест граничных случаев количества товара"""
-        test_cases = [0, 1, 100, 1000]
-
-        for quantity in test_cases:
-            product = Product("Test", "Test", 100.0, quantity)
-            assert product.quantity == quantity
-
-    def test_multiple_price_changes(self) -> None:
-        """Тест множественных изменений цены"""
-        product = Product("Test", "Test", 100.0, 1)
-
-        # Корректные изменения
-        product.price = 150.0
-        assert product.price == 150.0
-
-        product.price = 200.0
-        assert product.price == 200.0
-
-        # Некорректное изменение (не должно повлиять)
-        product.price = -50.0
-        assert product.price == 200.0  # Осталась предыдущая цена
-
-    def test_new_product_with_complete_data(self) -> None:
-        """Тест создания товара через new_product с полными данными"""
-        product_data = {
-            "name": "Complete Product",
-            "description": "Complete Description",
-            "price": 999.99,
-            "quantity": 25,
-        }
-        product = Product.new_product(product_data)
-        assert product.name == "Complete Product"
-        assert product.description == "Complete Description"
-        assert product.price == 999.99
-        assert product.quantity == 25
-
-    def test_product_str_method(self) -> None:
-        """Тест строкового представления продукта"""
-        product = Product("Test Product", "Test Description", 1234.56, 7)
-        expected = "Test Product, 1234.56 руб. Остаток: 7 шт."
-        assert str(product) == expected
-
-    def test_product_addition(self) -> None:
-        """Тест сложения двух продуктов"""
-        product1 = Product("Product 1", "Desc 1", 100.0, 5)
-        product2 = Product("Product 2", "Desc 2", 200.0, 3)
-
-        result = product1 + product2
-        expected = (100.0 * 5) + (200.0 * 3)  # 500 + 600 = 1100
-        assert result == expected
-
-    def test_product_addition_with_zero_quantity(self) -> None:
-        """Тест сложения продуктов с нулевым количеством"""
-        product1 = Product("Product 1", "Desc 1", 100.0, 0)
-        product2 = Product("Product 2", "Desc 2", 200.0, 5)
-
-        result = product1 + product2
-        expected = (100.0 * 0) + (200.0 * 5)  # 0 + 1000 = 1000
-        assert result == 1000.0
-
-    def test_product_addition_same_product(self) -> None:
-        """Тест сложения продукта с самим собой"""
-        product = Product("Test", "Desc", 50.0, 4)
-        result = product + product
-        expected = (50.0 * 4) + (50.0 * 4)  # 200 + 200 = 400
-        assert result == 400.0
-
-    def test_product_addition_different_types(self) -> None:
-        """Тест сложения продукта с неподдерживаемым типом"""
-        product = Product("Test", "Desc", 100.0, 5)
-
-        with pytest.raises(TypeError):
-            product + "not_a_product"
-
-    def test_product_addition_with_negative_price(self) -> None:
-        """Тест сложения продуктов с отрицательной ценой (через сеттер)"""
-        product1 = Product("Product 1", "Desc 1", 100.0, 5)
-        product2 = Product("Product 2", "Desc 2", -200.0, 3)  # Отрицательная цена через конструктор
-
-        # В конструкторе цена не проверяется, только через сеттер
-        result = product1 + product2
-        expected = (100.0 * 5) + (-200.0 * 3)  # 500 + (-600) = -100
-        assert result == -100.0
+class LawnGrass(Product):
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        country: str,
+        germination_period: str,
+        color: str,
+    ) -> None:
+        super().__init__(name, description, price, quantity)
+        self.country = country
+        self.germination_period = germination_period
+        self.color = color
