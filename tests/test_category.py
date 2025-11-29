@@ -243,7 +243,7 @@ class TestCategory:
         expected = "Single, количество продуктов: 5 шт."
         assert str(category) == expected
 
-    def test_category_add_product_inheritance(self):
+    def test_category_add_product_inheritance(self) -> None:
         """Тест что категория принимает наследников Product"""
         smartphone = Smartphone("Phone", "Desc", 1000.0, 2, 95.5, "Model", 128, "Black")
         category = Category("Test", "Test", [])

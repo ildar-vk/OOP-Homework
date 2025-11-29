@@ -6,20 +6,13 @@ from src.product import Smartphone, LawnGrass
 class TestMainCoverage:
     """Тесты для покрытия кода в main.py"""
 
-    def test_main_smartphone_creation(self):
+    def test_main_smartphone_creation(self) -> None:
         """Тест создания смартфонов как в main.py"""
         smartphone1 = Smartphone(
-            "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера",
-            180000.0, 5, 95.5, "S23 Ultra", 256, "Серый"
+            "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый"
         )
-        smartphone2 = Smartphone(
-            "Iphone 15", "512GB, Gray space", 210000.0, 8,
-            98.2, "15", 512, "Gray space"
-        )
-        smartphone3 = Smartphone(
-            "Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14,
-            90.3, "Note 11", 1024, "Синий"
-        )
+        smartphone2 = Smartphone("Iphone 15", "512GB, Gray space", 210000.0, 8, 98.2, "15", 512, "Gray space")
+        smartphone3 = Smartphone("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14, 90.3, "Note 11", 1024, "Синий")
 
         # Проверяем все атрибуты smartphone1
         assert smartphone1.name == "Samsung Galaxy S23 Ultra"
@@ -51,16 +44,10 @@ class TestMainCoverage:
         assert smartphone3.memory == 1024
         assert smartphone3.color == "Синий"
 
-    def test_main_lawn_grass_creation(self):
+    def test_main_lawn_grass_creation(self) -> None:
         """Тест создания газонной травы как в main.py"""
-        grass1 = LawnGrass(
-            "Газонная трава", "Элитная трава для газона", 500.0, 20,
-            "Россия", "7 дней", "Зеленый"
-        )
-        grass2 = LawnGrass(
-            "Газонная трава 2", "Выносливая трава", 450.0, 15,
-            "США", "5 дней", "Темно-зеленый"
-        )
+        grass1 = LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20, "Россия", "7 дней", "Зеленый")
+        grass2 = LawnGrass("Газонная трава 2", "Выносливая трава", 450.0, 15, "США", "5 дней", "Темно-зеленый")
 
         # Проверяем все атрибуты grass1
         assert grass1.name == "Газонная трава"
@@ -80,7 +67,7 @@ class TestMainCoverage:
         assert grass2.germination_period == "5 дней"
         assert grass2.color == "Темно-зеленый"
 
-    def test_main_addition_operations(self):
+    def test_main_addition_operations(self) -> None:
         """Тест операций сложения как в main.py"""
         smartphone1 = Smartphone("Phone1", "Desc", 180000.0, 5, 95.5, "Model", 256, "Color")
         smartphone2 = Smartphone("Phone2", "Desc", 210000.0, 8, 98.2, "Model", 512, "Color")
@@ -102,7 +89,7 @@ class TestMainCoverage:
         with pytest.raises(TypeError):
             smartphone1 + grass1
 
-    def test_main_category_operations(self):
+    def test_main_category_operations(self) -> None:
         """Тест операций с категориями как в main.py"""
         smartphone1 = Smartphone("Samsung Galaxy S23 Ultra", "Desc", 180000.0, 5, 95.5, "Model", 256, "Color")
         smartphone2 = Smartphone("Iphone 15", "Desc", 210000.0, 8, 98.2, "Model", 512, "Color")
@@ -133,13 +120,14 @@ class TestMainCoverage:
 
         # Ошибка при добавлении не-продукта
         with pytest.raises(TypeError):
-            category_smartphones.add_product("Not a product")
+            category_smartphones.add_product("Not a product")  # type: ignore
 
-    def test_main_complete_flow(self):
+    def test_main_complete_flow(self) -> None:
         """Полный тест потока выполнения как в main.py"""
         # Создание всех объектов
-        smartphone1 = Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5,
-                                 "S23 Ultra", 256, "Серый")
+        smartphone1 = Smartphone(
+            "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый"
+        )
         smartphone2 = Smartphone("Iphone 15", "512GB, Gray space", 210000.0, 8, 98.2, "15", 512, "Gray space")
         smartphone3 = Smartphone("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14, 90.3, "Note 11", 1024, "Синий")
 
@@ -174,7 +162,7 @@ class TestMainCoverage:
         # 4. Работа с категориями
         category_smartphones = Category("Смартфоны", "Высокотехнологичные смартфоны", [smartphone1, smartphone2])
         category_grass = Category("Газонная трава", "Различные виды газонной травы", [grass1, grass2])
-
+        assert len(category_grass) == 2
         # 5. Добавление продукта
         category_smartphones.add_product(smartphone3)
 
@@ -189,7 +177,7 @@ class TestMainCoverage:
 
         # 8. Ошибка добавления не-продукта
         try:
-            category_smartphones.add_product("Not a product")
+            category_smartphones.add_product("Not a product")  # type: ignore
             assert False, "Should have raised TypeError"
         except TypeError:
             pass  # Ожидаемое поведение

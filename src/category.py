@@ -8,7 +8,7 @@ class Category:
     def __init__(self, name: str, description: str, products: list) -> None:
         self.name = name
         self.description = description
-        self.__products = []
+        self.__products = []  # type: ignore
 
         # Добавляем продукты через метод для проверки типов
         for product in products:
@@ -16,7 +16,7 @@ class Category:
 
         Category.category_count += 1
 
-    def add_product(self, product):
+    def add_product(self, product: Product) -> None:
         """Добавляет товар в категорию с проверкой типа"""
         if not isinstance(product, Product):
             raise TypeError("Можно добавлять только объекты класса Product или его наследников")
@@ -28,7 +28,7 @@ class Category:
         total_quantity = sum(product.quantity for product in self.__products)
         return f"{self.name}, количество продуктов: {total_quantity} шт."
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.__products)
 
     @property
@@ -39,5 +39,5 @@ class Category:
         return "\n".join(products_str)
 
     @property
-    def products_list(self):
+    def products_list(self) -> list[Product]:
         return self.__products
