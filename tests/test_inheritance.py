@@ -1,9 +1,10 @@
-import pytest
-import sys
 import os
+import sys
 
-from src.product import Product, Smartphone, LawnGrass
+import pytest
+
 from src.category import Category
+from src.product import LawnGrass, Product, Smartphone
 
 # Добавляем путь к src для импорта
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))

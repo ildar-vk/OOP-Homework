@@ -1,5 +1,6 @@
 import pytest
-from src.product import Product, Smartphone, LawnGrass
+
+from src.product import LawnGrass, Product, Smartphone
 
 
 class TestProductSpecific:
