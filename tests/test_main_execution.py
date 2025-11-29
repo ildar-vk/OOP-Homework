@@ -1,7 +1,8 @@
-import pytest
+import os
 import subprocess
 import sys
-import os
+
+import pytest
 
 
 def test_main_direct_execution() -> None:

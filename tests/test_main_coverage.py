@@ -1,6 +1,7 @@
 import pytest
+
 from src.category import Category
-from src.product import Smartphone, LawnGrass
+from src.product import LawnGrass, Smartphone
 
 
 class TestMainCoverage:
