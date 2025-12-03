@@ -1,85 +1,109 @@
-from src.product import Product
+import pytest
+from src.product import Product, Smartphone, LawnGrass, BaseProduct
+import io
+import sys
 
 
-class Product:  # type: ignore
-    def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
-        self.name = name
-        self.description = description
-        self.__price = price
-        self.quantity = quantity
-
-    def __str__(self) -> str:
-        return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
-
-    def __add__(self, other: "Product") -> float:
-        if self.__class__ != other.__class__:
-            raise TypeError("Нельзя складывать товары разных типов")
-        return (self.__price * self.quantity) + (other.__price * other.quantity)
-
-    @classmethod
-    def new_product(cls, product_data: dict) -> "Product":
-        # Получаем значения с проверками
-        name = product_data.get("name")
-        description = product_data.get("description", "")  # значение по умолчанию
-        price = product_data.get("price")
-        quantity = product_data.get("quantity")
-
-        # Проверка обязательных полей
-        if not name:
-            raise ValueError("Отсутствует название товара")
-        if price is None:
-            raise ValueError("Отсутствует цена")
-        if quantity is None:
-            raise ValueError("Отсутствует количество")
-
-        # Явное преобразование типов
-        return cls(  # type: ignore
-            name=str(name), description=str(description), price=float(price), quantity=int(quantity)
-        )
-
-    @property
-    def price(self) -> float:
-        return self.__price
-
-    @price.setter
-    def price(self, price: float) -> None:
-        if price <= 0:
-            print("Цена не должна быть нулевой или отрицательной")
-        else:
-            self.__price = price
+def test_base_product_is_abstract():
+    """Проверка, что BaseProduct нельзя инстанциировать"""
+    with pytest.raises(TypeError):
+        BaseProduct("Test", "Test", 100, 1)
 
 
-class Smartphone(Product):
-    def __init__(
-        self,
-        name: str,
-        description: str,
-        price: float,
-        quantity: int,
-        efficiency: float,
-        model: str,
-        memory: int,
-        color: str,
-    ) -> None:
-        super().__init__(name, description, price, quantity)
-        self.efficiency = efficiency
-        self.model = model
-        self.memory = memory
-        self.color = color
+def test_product_logging(capsys):
+    """Проверка логирования создания Product"""
+    product = Product("Test Product", "Description", 100.0, 10)
+    captured = capsys.readouterr()
+    assert "Product('Test Product', 'Description', 100.0, 10)" in captured.out
 
 
-class LawnGrass(Product):
-    def __init__(
-        self,
-        name: str,
-        description: str,
-        price: float,
-        quantity: int,
-        country: str,
-        germination_period: str,
-        color: str,
-    ) -> None:
-        super().__init__(name, description, price, quantity)
-        self.country = country
-        self.germination_period = germination_period
-        self.color = color
+def test_smartphone_logging_all_parameters(capsys):
+    """Проверка что Smartphone выводит все 8 параметров"""
+    smartphone = Smartphone("Phone", "Desc", 100.0, 5, 2.0, "Model", 128, "Black")
+    captured = capsys.readouterr()
+    output = captured.out
+
+    # Проверяем что выведены все 8 параметров
+    assert "Smartphone(" in output
+    # Должно быть 7 запятых для 8 параметров
+    assert output.count(",") == 7
+    # Проверяем наличие всех параметров
+    assert "'Phone'" in output
+    assert "100.0" in output
+    assert "2.0" in output
+    assert "'Model'" in output
+    assert "128" in output
+    assert "'Black'" in output
+
+
+def test_lawn_grass_logging_all_parameters(capsys):
+    """Проверка что LawnGrass выводит все 7 параметров"""
+    grass = LawnGrass("Grass", "Green grass", 50.0, 20, "Russia", "14 days", "Green")
+    captured = capsys.readouterr()
+    output = captured.out
+
+    assert "LawnGrass(" in output
+    assert output.count(",") == 6  # 6 запятых для 7 параметров
+    assert "'Russia'" in output
+    assert "'14 days'" in output
+    assert "'Green'" in output
+
+
+def test_product_inheritance():
+    """Проверка наследования"""
+    product = Product("Test", "Test", 100, 1)
+    assert isinstance(product, BaseProduct)
+
+    smartphone = Smartphone("Phone", "Desc", 100, 1, 2.0, "M", 128, "B")
+    assert isinstance(smartphone, Product)
+    assert isinstance(smartphone, BaseProduct)
+
+    # Проверяем что Smartphone наследует только от Product
+    assert Smartphone.__bases__ == (Product,)
+
+
+def test_logmixin_repr():
+    """Проверка метода __repr__ из миксина"""
+    product = Product("Test", "Desc", 100, 5)
+    assert repr(product) == "Product(name='Test')"
+
+    smartphone = Smartphone("Phone", "Desc", 100, 1, 2.0, "M", 128, "B")
+    assert repr(smartphone) == "Smartphone(name='Phone')"
+
+
+def test_product_addition():
+    """Проверка сложения продуктов"""
+    p1 = Product("P1", "Desc", 100, 2)
+    p2 = Product("P2", "Desc", 200, 3)
+    assert p1 + p2 == 100 * 2 + 200 * 3
+
+    s1 = Smartphone("S1", "Desc", 100, 2, 2.0, "M", 128, "B")
+    s2 = Smartphone("S2", "Desc", 200, 3, 2.0, "M", 128, "B")
+    assert s1 + s2 == 100 * 2 + 200 * 3
+
+
+def test_addition_different_types():
+    """Проверка ошибки при сложении разных типов"""
+    smartphone = Smartphone("Phone", "Desc", 100, 1, 2.0, "M", 128, "B")
+    grass = LawnGrass("Grass", "Desc", 50, 2, "R", "14", "G")
+
+    with pytest.raises(TypeError, match="Нельзя складывать товары разных типов"):
+        smartphone + grass
+
+
+def test_product_price_property():
+    """Проверка property price"""
+    product = Product("Test", "Desc", 100, 5)
+    assert product.price == 100
+
+    # Изменение цены
+    product.price = 150
+    assert product.price == 150
+
+    # Проверка на отрицательную цену
+    captured_output = io.StringIO()
+    sys.stdout = captured_output
+    product.price = -10
+    sys.stdout = sys.__stdout__
+    assert "Цена не должна быть нулевой или отрицательной" in captured_output.getvalue()
+    assert product.price == 150  # Цена не изменилась
