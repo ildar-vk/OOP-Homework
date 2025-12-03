@@ -1,21 +1,22 @@
 from abc import ABC, abstractmethod
+from typing import Any
 
 
 class LogMixin:
     """Миксин для логирования создания объектов"""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:  # type: ignore
         super().__init__(*args, **kwargs)
         # Отложим логирование до момента, когда все параметры установлены
         # Будем вызывать явно из каждого класса
 
-    def _log_creation(self, params: list):
+    def _log_creation(self, params: list[str]) -> None:
         """Логирует создание объекта с переданными параметрами"""
         class_name = self.__class__.__name__
         print(f"{class_name}({', '.join(params)})")
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(name={repr(self.name)})"
+        return f"{self.__class__.__name__}(name={repr(self.name)})"  # type: ignore
 
 
 class BaseProduct(ABC):
@@ -33,7 +34,7 @@ class BaseProduct(ABC):
         pass
 
     @abstractmethod
-    def __add__(self, other):
+    def __add__(self, other: Any) -> float:
         pass
 
     @property
@@ -58,13 +59,8 @@ class Product(LogMixin, BaseProduct):
 
         # Логируем создание ТОЛЬКО для базового Product
         # (для наследников логирование будет в их собственных конструкторах)
-        if self.__class__.__name__ == 'Product':
-            params = [
-                repr(self.name),
-                repr(self.description),
-                str(float(self.price)),
-                str(self.quantity)
-            ]
+        if self.__class__.__name__ == "Product":
+            params = [repr(self.name), repr(self.description), str(float(self.price)), str(self.quantity)]
             self._log_creation(params)
 
         print(f"DEBUG: Product.__init__ завершен")
@@ -72,10 +68,10 @@ class Product(LogMixin, BaseProduct):
     def __str__(self) -> str:
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
-    def __add__(self, other) -> float:
+    def __add__(self, other) -> float:  # type: ignore
         if type(self) is not type(other):
             raise TypeError("Нельзя складывать товары разных типов")
-        return (self.price * self.quantity) + (other.price * other.quantity)
+        return (self.price * self.quantity) + (other.price * other.quantity)  # type: ignore
 
     @classmethod
     def new_product(cls, product_data: dict) -> "Product":
@@ -83,7 +79,7 @@ class Product(LogMixin, BaseProduct):
         description = product_data.get("description")
         price = product_data.get("price")
         quantity = product_data.get("quantity")
-        return cls(name, description, price, quantity)
+        return cls(name, description, price, quantity)  # type: ignore
 
     @property
     def price(self) -> float:
@@ -98,8 +94,17 @@ class Product(LogMixin, BaseProduct):
 
 
 class Smartphone(Product):
-    def __init__(self, name: str, description: str, price: float, quantity: int,
-                 efficiency: float, model: str, memory: int, color: str) -> None:
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        efficiency: float,
+        model: str,
+        memory: int,
+        color: str,
+    ) -> None:
         print(f"DEBUG: Smartphone.__init__ начат")
 
         # Сохраняем дополнительные параметры
@@ -120,7 +125,7 @@ class Smartphone(Product):
             str(self.efficiency),
             repr(self.model),
             str(self.memory),
-            repr(self.color)
+            repr(self.color),
         ]
         self._log_creation(params)
 
@@ -128,8 +133,16 @@ class Smartphone(Product):
 
 
 class LawnGrass(Product):
-    def __init__(self, name: str, description: str, price: float, quantity: int,
-                 country: str, germination_period: str, color: str) -> None:
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        country: str,
+        germination_period: str,
+        color: str,
+    ) -> None:
         print(f"DEBUG: LawnGrass.__init__ начат")
 
         # Сохраняем дополнительные параметры
@@ -148,7 +161,7 @@ class LawnGrass(Product):
             str(self.quantity),
             repr(self.country),
             repr(self.germination_period),
-            repr(self.color)
+            repr(self.color),
         ]
         self._log_creation(params)
 

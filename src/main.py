@@ -1,5 +1,5 @@
 from src.category import Category
-from src.product import Product, Smartphone, LawnGrass, BaseProduct, LogMixin
+from src.product import BaseProduct, LawnGrass, LogMixin, Product, Smartphone
 
 if __name__ == "__main__":
     print("=== Тестирование нового функционала (абстрактные классы и миксины) ===")
@@ -10,15 +10,11 @@ if __name__ == "__main__":
 
     print("\n2. Создание смартфона (должен быть лог):")
     smartphone1 = Smartphone(
-        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5,
-        95.5, "S23 Ultra", 256, "Серый"
+        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый"
     )
 
     print("\n3. Создание газонной травы (должен быть лог):")
-    grass1 = LawnGrass(
-        "Газонная трава", "Элитная трава для газона", 500.0, 20,
-        "Россия", "7 дней", "Зеленый"
-    )
+    grass1 = LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20, "Россия", "7 дней", "Зеленый")
 
     # Проверка что все работает как раньше
     print("\n4. Проверка функциональности:")
