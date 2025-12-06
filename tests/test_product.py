@@ -103,11 +103,12 @@ def test_product_price_property() -> None:
     product.price = 150
     assert product.price == 150
 
-    # Проверка на отрицательную цену - перехватываем исключение
-    try:
-        product.price = -10
-        assert False, "Должно было быть вызвано ValueError"
-    except ValueError as e:
-        assert "Цена не должна быть нулевой или отрицательной" in str(e)
+    # Проверка на отрицательную цену - цена не должна измениться
+    captured_output = io.StringIO()
+    sys.stdout = captured_output
+    product.price = -10
+    sys.stdout = sys.__stdout__
+    output = captured_output.getvalue()
+    assert "Цена не должна быть нулевой или отрицательной" in output
     # Цена не должна измениться
     assert product.price == 150

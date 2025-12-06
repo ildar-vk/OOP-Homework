@@ -1,5 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Any
+from typing import TYPE_CHECKING, Any, Optional, cast
+
+if TYPE_CHECKING:
+    from typing import Self
 
 
 class BaseProduct(ABC):
@@ -142,42 +145,37 @@ class BaseProduct(ABC):
 class LogMixin:
     """Миксин для логирования создания объектов"""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Логирует создание объекта"""
         # Вызываем конструктор следующего класса
         super().__init__(*args, **kwargs)
 
-    def _log_creation(self):
+    def _log_creation(self) -> None:
         """Логирует информацию о создании объекта"""
         class_name = self.__class__.__name__
 
         # Формируем строку с параметрами
-        params = []
+        params: list[str] = []
 
-        # Базовые параметры
-        if hasattr(self, "name") and self.name:
+        # Базовые параметры - проверяем через isinstance
+        if isinstance(self, BaseProduct):
             params.append(repr(self.name))
-        if hasattr(self, "description") and self.description:
             params.append(repr(self.description))
-
-        # Цена
-        if hasattr(self, "price"):
             params.append(str(self.price))
-
-        # Количество
-        if hasattr(self, "quantity"):
             params.append(str(self.quantity))
 
         # Для наследников добавляем специфические параметры
-        if hasattr(self, "efficiency"):
-            params.append(str(self.efficiency))
-            params.append(repr(self.model))
-            params.append(str(self.memory))
-            params.append(repr(self.color))
-        elif hasattr(self, "country"):
-            params.append(repr(self.country))
-            params.append(repr(self.germination_period))
-            params.append(repr(self.color))
+        if hasattr(self, "efficiency") and hasattr(self, "model"):
+            # Это Smartphone
+            params.append(str(self.efficiency))  # type: ignore[attr-defined]
+            params.append(repr(self.model))  # type: ignore[attr-defined]
+            params.append(str(self.memory))  # type: ignore[attr-defined]
+            params.append(repr(self.color))  # type: ignore[attr-defined]
+        elif hasattr(self, "country") and hasattr(self, "germination_period"):
+            # Это LawnGrass
+            params.append(repr(self.country))  # type: ignore[attr-defined]
+            params.append(repr(self.germination_period))  # type: ignore[attr-defined]
+            params.append(repr(self.color))  # type: ignore[attr-defined]
 
         # Выводим результат
         print(f"{class_name}({', '.join(params)})")
@@ -185,17 +183,36 @@ class LogMixin:
     def __repr__(self) -> str:
         """Возвращает строковое представление объекта для отладки"""
         class_name = self.__class__.__name__
-        if hasattr(self, "name"):
-            # Для обычного Product
-            if hasattr(self, "efficiency"):
+
+        if isinstance(self, BaseProduct):
+            if hasattr(self, "efficiency") and hasattr(self, "model"):
                 # Это Smartphone
-                return f"Smartphone(name={repr(self.name)}, description={repr(self.description)}, price={self.price}, quantity={self.quantity}, efficiency={self.efficiency}, model={repr(self.model)}, memory={self.memory}, color={repr(self.color)})"
-            elif hasattr(self, "country"):
+                return (
+                    f"Smartphone(name={repr(self.name)}, "
+                    f"description={repr(self.description)}, "
+                    f"price={self.price}, quantity={self.quantity}, "
+                    f"efficiency={self.efficiency}, "  # type: ignore[attr-defined]
+                    f"model={repr(self.model)}, "  # type: ignore[attr-defined]
+                    f"memory={self.memory}, "  # type: ignore[attr-defined]
+                    f"color={repr(self.color)})"
+                )  # type: ignore[attr-defined]
+            elif hasattr(self, "country") and hasattr(self, "germination_period"):
                 # Это LawnGrass
-                return f"LawnGrass(name={repr(self.name)}, description={repr(self.description)}, price={self.price}, quantity={self.quantity}, country={repr(self.country)}, germination_period={repr(self.germination_period)}, color={repr(self.color)})"
+                return (
+                    f"LawnGrass(name={repr(self.name)}, "
+                    f"description={repr(self.description)}, "
+                    f"price={self.price}, quantity={self.quantity}, "
+                    f"country={repr(self.country)}, "  # type: ignore[attr-defined]
+                    f"germination_period={repr(self.germination_period)}, "  # type: ignore[attr-defined]
+                    f"color={repr(self.color)})"
+                )  # type: ignore[attr-defined]
             else:
                 # Обычный Product
-                return f"Product(name={repr(self.name)}, description={repr(self.description)}, price={self.price}, quantity={self.quantity})"
+                return (
+                    f"Product(name={repr(self.name)}, "
+                    f"description={repr(self.description)}, "
+                    f"price={self.price}, quantity={self.quantity})"
+                )
         return f"{class_name}()"
 
 
@@ -215,6 +232,8 @@ class Product(LogMixin, BaseProduct):
     def __add__(self, other: Any) -> float:
         if type(self) is not type(other):
             raise TypeError("Нельзя складывать товары разных типов")
+        if not isinstance(other, Product):
+            raise TypeError("Можно складывать только объекты Product")
         return (self.__price * self.quantity) + (other.__price * other.quantity)
 
     def __eq__(self, other: Any) -> bool:
@@ -229,7 +248,9 @@ class Product(LogMixin, BaseProduct):
     @price.setter
     def price(self, price: float) -> None:
         if price <= 0:
-            raise ValueError("Цена не должна быть нулевой или отрицательной")
+            print("Цена не должна быть нулевой или отрицательной")
+            # Не меняем цену, просто выходим
+            return
         self.__price = price
 
     def get_total_value(self) -> float:
@@ -244,10 +265,10 @@ class Product(LogMixin, BaseProduct):
             if field not in product_data:
                 raise KeyError(f"Отсутствует обязательное поле: {field}")
 
-        name = product_data.get("name")
+        name = product_data.get("name", "")
         description = product_data.get("description", "")
-        price = product_data.get("price")
-        quantity = product_data.get("quantity")
+        price = float(product_data.get("price", 0))
+        quantity = int(product_data.get("quantity", 0))
 
         return cls(name, description, price, quantity)
 
@@ -293,6 +314,33 @@ class Smartphone(Product):
             and self.color == other.color
         )
 
+    def get_total_value(self) -> float:
+        return self.price * self.quantity
+
+    @classmethod
+    def new_product(cls, product_data: dict) -> "Smartphone":
+        required_fields = ["name", "price", "quantity", "efficiency", "model", "memory", "color"]
+        for field in required_fields:
+            if field not in product_data:
+                raise KeyError(f"Отсутствует обязательное поле: {field}")
+
+        return cls(
+            name=str(product_data["name"]),
+            description=str(product_data.get("description", "")),
+            price=float(product_data["price"]),
+            quantity=int(product_data["quantity"]),
+            efficiency=float(product_data["efficiency"]),
+            model=str(product_data["model"]),
+            memory=int(product_data["memory"]),
+            color=str(product_data["color"]),
+        )
+
+    def apply_discount(self, percent: float) -> None:
+        if not 0 <= percent <= 100:
+            raise ValueError("Процент скидки должен быть от 0 до 100")
+        discount_factor = (100 - percent) / 100
+        self.price = round(self.price * discount_factor, 2)
+
 
 class LawnGrass(Product):
     """Класс газонной травы - наследник Product"""
@@ -323,3 +371,29 @@ class LawnGrass(Product):
             and self.germination_period == other.germination_period
             and self.color == other.color
         )
+
+    def get_total_value(self) -> float:
+        return self.price * self.quantity
+
+    @classmethod
+    def new_product(cls, product_data: dict) -> "LawnGrass":
+        required_fields = ["name", "price", "quantity", "country", "germination_period", "color"]
+        for field in required_fields:
+            if field not in product_data:
+                raise KeyError(f"Отсутствует обязательное поле: {field}")
+
+        return cls(
+            name=str(product_data["name"]),
+            description=str(product_data.get("description", "")),
+            price=float(product_data["price"]),
+            quantity=int(product_data["quantity"]),
+            country=str(product_data["country"]),
+            germination_period=str(product_data["germination_period"]),
+            color=str(product_data["color"]),
+        )
+
+    def apply_discount(self, percent: float) -> None:
+        if not 0 <= percent <= 100:
+            raise ValueError("Процент скидки должен быть от 0 до 100")
+        discount_factor = (100 - percent) / 100
+        self.price = round(self.price * discount_factor, 2)
