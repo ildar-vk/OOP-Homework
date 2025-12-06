@@ -84,13 +84,15 @@ class TestProductSpecific:
         """Тест валидации цены"""
         product = Product("Test", "Desc", 100.0, 5)
 
-        # Некорректные значения
-        product.price = -50
-        captured = capsys.readouterr()
-        assert "Цена не должна быть нулевой или отрицательной" in captured.out
+        # Некорректные значения - перехватываем исключение
+        with pytest.raises(ValueError) as exc_info:
+            product.price = -50
+
+        assert "Цена не должна быть нулевой или отрицательной" in str(exc_info.value)
         assert product.price == 100.0  # Цена не изменилась
 
-        product.price = 0
-        captured = capsys.readouterr()
-        assert "Цена не должна быть нулевой или отрицательной" in captured.out
+        with pytest.raises(ValueError) as exc_info:
+            product.price = 0
+
+        assert "Цена не должна быть нулевой или отрицательной" in str(exc_info.value)
         assert product.price == 100.0  # Цена не изменилась
