@@ -1,15 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING, Any
 
-
-class ZeroQuantityError(ValueError):
-    """Пользовательское исключение для товаров с нулевым количеством"""
-
-    def __init__(self, message: str = "Товар с нулевым количеством не может быть добавлен") -> None:
-        self.message = message
-        super().__init__(self.message)
-
-
 if not TYPE_CHECKING:
     pass
 
@@ -230,14 +221,8 @@ class Product(LogMixin, BaseProduct):
     """Конкретный класс продукта с множественным наследованием"""
 
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
-        # Проверка на нулевое количество (Задание 1)
-        if quantity == 0:
-            raise ZeroQuantityError("Товар с нулевым количеством не может быть добавлен")
-
-        # Вызываем конструкторы родителей
         super().__init__(name, description, price, quantity)
         self.__price = price
-
         # Для обычного Product вызываем логирование здесь
         if self.__class__ == Product:
             self._log_creation()
@@ -315,7 +300,7 @@ class Smartphone(Product):
         self.efficiency = efficiency
         self.model = model
         self.memory = memory
-        self.color = color  # type: ignore
+        self.color = color
         # Вызываем логирование после установки всех атрибутов
         self._log_creation()
 
@@ -374,7 +359,7 @@ class LawnGrass(Product):
         super().__init__(name, description, price, quantity)
         self.country = country
         self.germination_period = germination_period
-        self.color = color  # type: ignore
+        self.color = color
         # Вызываем логирование после установки всех атрибутов
         self._log_creation()
 

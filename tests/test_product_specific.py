@@ -84,7 +84,7 @@ class TestProductSpecific:
         """Тест валидации цены"""
         product = Product("Test", "Desc", 100.0, 5)
 
-        # Некорректные значения
+        # Некорректные значения - цена не должна измениться
         product.price = -50
         captured = capsys.readouterr()
         assert "Цена не должна быть нулевой или отрицательной" in captured.out
