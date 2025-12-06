@@ -3,7 +3,7 @@ import sys
 
 import pytest
 
-from src.product import BaseProduct, LawnGrass, Product, Smartphone
+from src.product import BaseProduct, LawnGrass, Product, Smartphone, ZeroQuantityError
 
 
 def test_base_product_is_abstract() -> None:

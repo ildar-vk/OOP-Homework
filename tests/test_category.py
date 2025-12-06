@@ -175,10 +175,12 @@ class TestCategory:
         assert category.products_list[0] == self.product1
         assert category.products_list[1] == self.product2
 
+    # tests/test_category.py (часть с конфликтом)
+
     def test_category_with_many_products(self) -> None:
         """Тест категории с большим количеством товаров"""
         products = []
-        for i in range(5):
+        for i in range(1, 6):  # Начинаем с 1, чтобы избежать quantity=0
             product = Product(f"Product{i}", f"Description{i}", 100 * i, i)
             products.append(product)
 
@@ -187,7 +189,7 @@ class TestCategory:
         # Проверяем products_list
         products_list = category.products_list
         assert len(products_list) == 5
-        for i, product in enumerate(products_list):
+        for i, product in enumerate(products_list, start=1):
             assert product.name == f"Product{i}"
             assert product.price == 100 * i
             assert product.quantity == i
