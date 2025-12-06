@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eea674f6-234d-41a1-8305-b646a7a08232" name="Changes" comment="" />
+    <list default="true" id="eea674f6-234d-41a1-8305-b646a7a08232" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/category.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/category.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_product.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,29 +52,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.pytest for tests.test_inheritance.TestIntegration.test_main_scenario.executor": "Run",
-    "Python tests.pytest for tests.test_integration_complete.TestIntegrationComplete.executor": "Run",
-    "Python tests.pytest for tests.test_main.test_main_execution.executor": "Run",
-    "Python tests.pytest for tests.test_main_coverage.TestMainCoverage.executor": "Run",
-    "Python tests.pytest for tests.test_main_execution.test_main_direct_execution.executor": "Run",
-    "Python tests.pytest for tests.test_product.TestProduct.test_product_addition_same_type_only.executor": "Run",
-    "Python tests.pytest for tests.test_type_function.test_main_scenario_with_type.executor": "Run",
-    "Python tests.pytest for tests.tests.tests.test_integration_complete.TestIntegrationComplete.executor": "Run",
-    "Python tests.pytest in test_inheritance.py.executor": "Run",
-    "Python tests.pytest in test_main_execution.py.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.test_product.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "feature/task5"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.pytest for tests.test_inheritance.TestIntegration.test_main_scenario.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for tests.test_integration_complete.TestIntegrationComplete.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for tests.test_main.test_main_execution.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for tests.test_main_coverage.TestMainCoverage.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for tests.test_main_execution.test_main_direct_execution.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for tests.test_product.TestProduct.test_product_addition_same_type_only.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for tests.test_product.test_lawn_grass_logging_all_parameters.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for tests.test_product.test_product_logging.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for tests.test_product.test_smartphone_logging_all_parameters.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for tests.test_type_function.test_main_scenario_with_type.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest for tests.tests.tests.test_integration_complete.TestIntegrationComplete.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest in test_inheritance.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest in test_main_execution.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_product.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/task5&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/tests" />
@@ -97,7 +106,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for tests.test_inheritance.TestIntegration.test_main_scenario" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for tests.test_product.test_lawn_grass_logging_all_parameters" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="OOP" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -110,11 +119,11 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_inheritance.TestIntegration.test_main_scenario&quot;" />
+      <option name="_new_target" value="&quot;tests.test_product.test_lawn_grass_logging_all_parameters&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for tests.test_integration_complete.TestIntegrationComplete" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for tests.test_product.test_product_logging" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="OOP" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -127,11 +136,11 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_integration_complete.TestIntegrationComplete&quot;" />
+      <option name="_new_target" value="&quot;tests.test_product.test_product_logging&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for tests.test_main_coverage.TestMainCoverage" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for tests.test_product.test_smartphone_logging_all_parameters" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="OOP" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -144,7 +153,7 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_main_coverage.TestMainCoverage&quot;" />
+      <option name="_new_target" value="&quot;tests.test_product.test_smartphone_logging_all_parameters&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -168,10 +177,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python tests.pytest for tests.test_product.test_lawn_grass_logging_all_parameters" />
+        <item itemvalue="Python tests.pytest for tests.test_product.test_smartphone_logging_all_parameters" />
+        <item itemvalue="Python tests.pytest for tests.test_product.test_product_logging" />
         <item itemvalue="Python tests.pytest for tests.test_type_function.test_main_scenario_with_type" />
-        <item itemvalue="Python tests.pytest for tests.test_inheritance.TestIntegration.test_main_scenario" />
-        <item itemvalue="Python tests.pytest for tests.test_main_coverage.TestMainCoverage" />
-        <item itemvalue="Python tests.pytest for tests.test_integration_complete.TestIntegrationComplete" />
       </list>
     </recent_temporary>
   </component>

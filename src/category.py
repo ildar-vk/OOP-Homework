@@ -1,3 +1,6 @@
+# src/category.py
+
+from typing import List
 from src.product import Product
 
 
@@ -23,6 +26,18 @@ class Category:
 
         self.__products.append(product)
         Category.product_count += 1
+
+    def middle_price(self) -> float:
+        """
+        Рассчитывает средний ценник всех товаров в категории.
+        Возвращает 0, если в категории нет товаров.
+        """
+        try:
+            # Задание 2: обработка деления на ноль
+            total_price = sum(product.price for product in self.__products)
+            return total_price / len(self.__products)
+        except ZeroDivisionError:
+            return 0.0
 
     def __str__(self) -> str:
         total_quantity = sum(product.quantity for product in self.__products)

@@ -3,7 +3,7 @@ import sys
 
 import pytest
 
-from src.product import BaseProduct, LawnGrass, Product, Smartphone
+from src.product import BaseProduct, LawnGrass, Product, Smartphone, ZeroQuantityError
 
 
 def test_base_product_is_abstract() -> None:
@@ -112,3 +112,15 @@ def test_product_price_property() -> None:
     sys.stdout = sys.__stdout__
     assert "Цена не должна быть нулевой или отрицательной" in captured_output.getvalue()
     assert product.price == 150  # Цена не изменилась
+
+
+# tests/test_product.py (добавить в конец)
+
+def test_zero_quantity_in_product_creation(capsys):
+    """Тест создания продукта с нулевым количеством"""
+    with pytest.raises(ZeroQuantityError):
+        Product("Test", "Desc", 100.0, 0)
+
+    # Проверяем что не было попытки логирования
+    captured = capsys.readouterr()
+    assert "Product(" not in captured.out

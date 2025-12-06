@@ -1,6 +1,12 @@
 from abc import ABC, abstractmethod
 from typing import Any
 
+class ZeroQuantityError(ValueError):
+    """Пользовательское исключение для товаров с нулевым количеством"""
+    def __init__(self, message="Товар с нулевым количеством не может быть добавлен"):
+        self.message = message
+        super().__init__(self.message)
+
 
 class LogMixin:
     """Миксин для логирования создания объектов"""
@@ -48,23 +54,28 @@ class BaseProduct(ABC):
         pass
 
 
+# src/product.py (обновленный класс Product)
+
 class Product(LogMixin, BaseProduct):
     """Класс продукта с множественным наследованием"""
 
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         print(f"DEBUG: Product.__init__ начат")
+
+        # Проверка на нулевое количество (Задание 1)
+        if quantity == 0:
+            raise ZeroQuantityError("Товар с нулевым количеством не может быть добавлен")
+
         # Вызываем конструкторы родителей
         super().__init__(name, description, price, quantity)
         self.__price = price
 
         # Логируем создание ТОЛЬКО для базового Product
-        # (для наследников логирование будет в их собственных конструкторах)
         if self.__class__.__name__ == "Product":
             params = [repr(self.name), repr(self.description), str(float(self.price)), str(self.quantity)]
             self._log_creation(params)
 
         print(f"DEBUG: Product.__init__ завершен")
-
     def __str__(self) -> str:
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
