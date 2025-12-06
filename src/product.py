@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Any, Optional, cast
+from typing import TYPE_CHECKING, Any
 
-if TYPE_CHECKING:
-    from typing import Self
+if not TYPE_CHECKING:
+    pass
 
 
 class BaseProduct(ABC):
@@ -22,6 +22,7 @@ class BaseProduct(ABC):
             price: Цена продукта
             quantity: Количество на складе
         """
+        self.color = None
         self.name = name
         self.description = description
         self._price = price
