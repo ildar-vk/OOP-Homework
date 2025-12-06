@@ -1,6 +1,6 @@
 # src/category.py
 
-from typing import List
+
 from src.product import Product
 
 
@@ -35,7 +35,7 @@ class Category:
         try:
             # Задание 2: обработка деления на ноль
             total_price = sum(product.price for product in self.__products)
-            return total_price / len(self.__products)
+            return total_price / len(self.__products)  # type: ignore
         except ZeroDivisionError:
             return 0.0
 

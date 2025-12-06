@@ -116,9 +116,10 @@ def test_product_price_property() -> None:
 
 # tests/test_product.py (добавить в конец)
 
-def test_zero_quantity_in_product_creation(capsys):
+
+def test_zero_quantity_in_product_creation(capsys: pytest.CaptureFixture[str]):  # type: ignore
     """Тест создания продукта с нулевым количеством"""
-    with pytest.raises(ZeroQuantityError):
+    with pytest.raises(ZeroQuantityError):  # type: ignore
         Product("Test", "Desc", 100.0, 0)
 
     # Проверяем что не было попытки логирования

@@ -1,9 +1,11 @@
 from abc import ABC, abstractmethod
 from typing import Any
 
+
 class ZeroQuantityError(ValueError):
     """Пользовательское исключение для товаров с нулевым количеством"""
-    def __init__(self, message="Товар с нулевым количеством не может быть добавлен"):
+
+    def __init__(self, message="Товар с нулевым количеством не может быть добавлен"):  # type: ignore
         self.message = message
         super().__init__(self.message)
 
@@ -56,6 +58,7 @@ class BaseProduct(ABC):
 
 # src/product.py (обновленный класс Product)
 
+
 class Product(LogMixin, BaseProduct):
     """Класс продукта с множественным наследованием"""
 
@@ -76,6 +79,7 @@ class Product(LogMixin, BaseProduct):
             self._log_creation(params)
 
         print(f"DEBUG: Product.__init__ завершен")
+
     def __str__(self) -> str:
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 

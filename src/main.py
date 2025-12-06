@@ -1,7 +1,7 @@
 # main.py
 
 from src.category import Category
-from src.product import Product, Smartphone, LawnGrass, ZeroQuantityError
+from src.product import  Product, ZeroQuantityError
 
 if __name__ == "__main__":
     print("=== Тестирование обработки исключений ===")
