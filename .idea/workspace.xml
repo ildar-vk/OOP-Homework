@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eea674f6-234d-41a1-8305-b646a7a08232" name="Changes" comment="" />
+    <list default="true" id="eea674f6-234d-41a1-8305-b646a7a08232" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_product_specific.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_product_specific.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,6 +62,12 @@
     "Python tests.pytest for tests.test_main_coverage.TestMainCoverage.executor": "Run",
     "Python tests.pytest for tests.test_main_execution.test_main_direct_execution.executor": "Run",
     "Python tests.pytest for tests.test_product.TestProduct.test_product_addition_same_type_only.executor": "Run",
+    "Python tests.pytest for tests.test_product.test_lawn_grass_logging_all_parameters.executor": "Run",
+    "Python tests.pytest for tests.test_product.test_logmixin_repr.executor": "Run",
+    "Python tests.pytest for tests.test_product.test_product_logging.executor": "Run",
+    "Python tests.pytest for tests.test_product.test_product_price_property.executor": "Run",
+    "Python tests.pytest for tests.test_product.test_smartphone_logging_all_parameters.executor": "Run",
+    "Python tests.pytest for tests.test_product_specific.TestProductSpecific.test_product_price_validation.executor": "Run",
     "Python tests.pytest for tests.test_type_function.test_main_scenario_with_type.executor": "Run",
     "Python tests.pytest for tests.tests.tests.test_integration_complete.TestIntegrationComplete.executor": "Run",
     "Python tests.pytest in test_inheritance.py.executor": "Run",
@@ -97,7 +109,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for tests.test_inheritance.TestIntegration.test_main_scenario" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for tests.test_product_specific.TestProductSpecific.test_product_price_validation" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="OOP" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -110,11 +122,11 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_inheritance.TestIntegration.test_main_scenario&quot;" />
+      <option name="_new_target" value="&quot;tests.test_product_specific.TestProductSpecific.test_product_price_validation&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for tests.test_integration_complete.TestIntegrationComplete" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for tests.test_product.test_lawn_grass_logging_all_parameters" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="OOP" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -127,11 +139,11 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_integration_complete.TestIntegrationComplete&quot;" />
+      <option name="_new_target" value="&quot;tests.test_product.test_lawn_grass_logging_all_parameters&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for tests.test_main_coverage.TestMainCoverage" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for tests.test_product.test_logmixin_repr" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="OOP" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -144,11 +156,11 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_main_coverage.TestMainCoverage&quot;" />
+      <option name="_new_target" value="&quot;tests.test_product.test_logmixin_repr&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for tests.test_type_function.test_main_scenario_with_type" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for tests.test_product.test_product_price_property" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="OOP" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -161,17 +173,17 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_type_function.test_main_scenario_with_type&quot;" />
+      <option name="_new_target" value="&quot;tests.test_product.test_product_price_property&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python tests.pytest for tests.test_type_function.test_main_scenario_with_type" />
-        <item itemvalue="Python tests.pytest for tests.test_inheritance.TestIntegration.test_main_scenario" />
-        <item itemvalue="Python tests.pytest for tests.test_main_coverage.TestMainCoverage" />
-        <item itemvalue="Python tests.pytest for tests.test_integration_complete.TestIntegrationComplete" />
+        <item itemvalue="Python tests.pytest for tests.test_product_specific.TestProductSpecific.test_product_price_validation" />
+        <item itemvalue="Python tests.pytest for tests.test_product.test_product_price_property" />
+        <item itemvalue="Python tests.pytest for tests.test_product.test_logmixin_repr" />
+        <item itemvalue="Python tests.pytest for tests.test_product.test_lawn_grass_logging_all_parameters" />
       </list>
     </recent_temporary>
   </component>
