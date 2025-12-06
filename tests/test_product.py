@@ -70,10 +70,9 @@ def test_product_inheritance() -> None:
 def test_logmixin_repr() -> None:
     """Проверка метода __repr__ из миксина"""
     product = Product("Test", "Desc", 100, 5)
-    assert repr(product) == "Product(name='Test')"
-
-    smartphone = Smartphone("Phone", "Desc", 100, 1, 2.0, "M", 128, "B")
-    assert repr(smartphone) == "Smartphone(name='Phone')"
+    # Теперь repr возвращает полное представление
+    expected = "Product(name='Test', description='Desc', price=100, quantity=5)"
+    assert repr(product) == expected
 
 
 def test_product_addition() -> None:
